@@ -1429,68 +1429,75 @@ for all using (bucket_id = 'allegati');</div>
     </div>
   </div>
 
-  <!-- ══════════════ BETTING ══════════════ -->
+  <!-- ══════════════ M.BETTING ══════════════ -->
   <div class="page" id="page-betting">
     <div class="sec-hdr">
       <div>
-        <div class="sec-title">🃏 Matched Betting +</div>
-        <div class="sec-sub">PokerStars · Snai · Sisal</div>
+        <div class="sec-title">🃏 M. Betting</div>
+        <div class="sec-sub">Converti i bonus benvenuto in denaro reale</div>
       </div>
       <div class="sec-actions">
-        <button class="btn btn-primary" onclick="showBettingModal()">+ Nuova Apertura</button>
+        <button class="btn btn-ghost" onclick="exportSection('betting')">⬇️ Export</button>
+        <button class="btn btn-primary" onclick="showBettingModal()">+ Nuovo Cliente</button>
       </div>
     </div>
 
-    <!-- KPI strip -->
+    <!-- KPI -->
     <div class="stats-strip">
-      <div class="stat-c"><div class="stat-ico">🃏</div><div class="stat-lbl">Totali</div><div class="stat-val" id="bet-cnt">0</div></div>
+      <div class="stat-c"><div class="stat-ico">👥</div><div class="stat-lbl">Clienti Totali</div><div class="stat-val" id="bet-cnt">0</div></div>
       <div class="stat-c"><div class="stat-ico">⏳</div><div class="stat-lbl">In Attesa</div><div class="stat-val c-y" id="bet-attesa">0</div></div>
-      <div class="stat-c"><div class="stat-ico">✅</div><div class="stat-lbl">Validate</div><div class="stat-val c-g" id="bet-valid">0</div></div>
+      <div class="stat-c"><div class="stat-ico">✅</div><div class="stat-lbl">Validati</div><div class="stat-val c-g" id="bet-valid">0</div></div>
       <div class="stat-c"><div class="stat-ico">🔄</div><div class="stat-lbl">In Rollover</div><div class="stat-val c-o" id="bet-act">0</div></div>
-      <div class="stat-c"><div class="stat-ico">💶</div><div class="stat-lbl">Evase</div><div class="stat-val c-g" id="bet-comp">0</div></div>
-      <div class="stat-c"><div class="stat-ico">💰</div><div class="stat-lbl">Gain Lordo</div><div class="stat-val c-g" id="bet-gain">€0,00</div></div>
+      <div class="stat-c"><div class="stat-ico">💶</div><div class="stat-lbl">Evasi</div><div class="stat-val c-g" id="bet-comp">0</div></div>
+      <div class="stat-c"><div class="stat-ico">💰</div><div class="stat-lbl">Gain Lordo Tot.</div><div class="stat-val c-g" id="bet-gain">€0,00</div></div>
       <div class="stat-c"><div class="stat-ico">🏦</div><div class="stat-lbl">Netto Incassato</div><div class="stat-val c-g" id="bet-prof">€0,00</div></div>
     </div>
 
     <div class="card">
       <!-- Filtri semplici -->
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 0 14px">
-        <select id="bet-filter-piatt" class="filter-input" style="max-width:150px" onchange="renderBetting()">
-          <option value="">Tutte le piattaforme</option>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:4px 0 16px">
+        <select id="bet-filter-piatt" class="filter-input" style="max-width:160px" onchange="renderBetting()">
+          <option value="">Tutte le provenienze</option>
           <option value="PokerStars">♠️ PokerStars</option>
           <option value="Snai">🎯 Snai</option>
           <option value="Sisal">🎰 Sisal</option>
+          <option value="Betfair">⚫ Betfair</option>
+          <option value="Betsson">🟠 Betsson</option>
+          <option value="Goldbet">🟡 Goldbet</option>
+          <option value="Lottomatica">🔵 Lottomatica</option>
+          <option value="Netbet">🔴 Netbet</option>
+          <option value="Planetwin365">⚫ Planetwin365</option>
+          <option value="Altro">Altro</option>
         </select>
-        <select id="bet-filter-stato" class="filter-input" style="max-width:170px" onchange="renderBetting()">
+        <select id="bet-filter-stato" class="filter-input" style="max-width:180px" onchange="renderBetting()">
           <option value="">Tutti gli stati</option>
           <option value="Attesa Validazione">⏳ Attesa Validazione</option>
           <option value="Validato">✅ Validato</option>
           <option value="Rollato">🔄 Rollato</option>
           <option value="Evaso">💶 Evaso</option>
-          <option value="Annullato">❌ Annullato</option>
+          <option value="Non Adatto">❌ Non Adatto</option>
+          <option value="Sospeso">⏸️ Sospeso</option>
         </select>
-        <input type="text" class="filter-input" id="bet-filter-search" placeholder="🔍 Cerca cliente..." style="max-width:180px" oninput="renderBetting()">
+        <input type="text" class="filter-input" id="bet-filter-search" placeholder="🔍 Cerca nome/email..." style="max-width:200px" oninput="renderBetting()">
         <button class="btn btn-ghost btn-sm" onclick="resetBetFilters()">✕ Reset</button>
       </div>
 
-      <!-- Tabella -->
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Piattaforma</th>
-              <th>Cliente</th>
-              <th>Data</th>
-              <th>Gain Lordo</th>
-              <th>Costo Id.</th>
-              <th>Comm. Prel.</th>
-              <th>Netto</th>
-              <th>Stato</th>
-              <th>Note</th>
-              <th>Azioni</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>#</th>
+            <th>Provenienza</th>
+            <th>Cliente</th>
+            <th>Contatti</th>
+            <th>Data</th>
+            <th>Gain Lordo</th>
+            <th>Costo Id.</th>
+            <th>Comm.</th>
+            <th>Netto</th>
+            <th>Stato</th>
+            <th>Note</th>
+            <th>Azioni</th>
+          </tr></thead>
           <tbody id="bet-tb"></tbody>
         </table>
       </div>
@@ -1936,12 +1943,13 @@ for all using (bucket_id = 'allegati');</div>
 </div>
 
 <!-- BETTING -->
+<!-- M.BETTING MODAL -->
 <div class="modal-overlay" id="betting-modal">
   <div class="modal modal-wide">
-    <div class="modal-tit" id="bet-modal-tit">🃏 Nuova Apertura</div>
+    <div class="modal-tit" id="bet-modal-tit">🃏 Nuovo Cliente M.Betting</div>
 
-    <!-- Calcolo netto in tempo reale -->
-    <div style="background:var(--sur2);border:1px solid var(--bdr2);border-radius:var(--rad2);padding:14px 16px;margin-bottom:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+    <!-- Preview calcolo netto -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:var(--sur2);border:1px solid var(--bdr2);border-radius:var(--rad2);padding:14px 16px;margin-bottom:18px">
       <div style="text-align:center">
         <div style="font-size:9.5px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px">Gain Lordo</div>
         <div style="font-family:var(--num-font);font-size:20px;font-weight:500;color:var(--g);font-variant-numeric:tabular-nums" id="bt-calc-gain">€0,00</div>
@@ -1961,35 +1969,52 @@ for all using (bucket_id = 'allegati');</div>
     </div>
 
     <div class="form-grid">
-      <div class="form-group"><label>Piattaforma *</label>
+      <!-- Provenienza -->
+      <div class="form-group"><label>Provenienza *</label>
         <select id="bt-piatt">
           <option value="PokerStars">♠️ PokerStars</option>
           <option value="Snai">🎯 Snai</option>
           <option value="Sisal">🎰 Sisal</option>
+          <option value="Betfair">⚫ Betfair</option>
+          <option value="Betsson">🟠 Betsson</option>
+          <option value="Goldbet">🟡 Goldbet</option>
+          <option value="Lottomatica">🔵 Lottomatica</option>
+          <option value="Netbet">🔴 Netbet</option>
+          <option value="Planetwin365">⚫ Planetwin365</option>
+          <option value="Altro">➕ Altro</option>
         </select>
       </div>
-      <div class="form-group"><label>Cliente *</label>
-        <input id="bt-client" placeholder="Nome e cognome cliente">
-      </div>
-      <div class="form-group"><label>Email Cliente</label>
-        <input type="email" id="bt-email" placeholder="email@esempio.com">
-      </div>
-      <div class="form-group"><label>Telefono Cliente</label>
-        <input type="tel" id="bt-tel" placeholder="+39 333 1234567">
-      </div>
-      <div class="form-group"><label>Data Apertura</label>
-        <input type="date" id="bt-data">
-      </div>
-      <div class="form-group"><label>Stato</label>
+
+      <!-- Stato -->
+      <div class="form-group"><label>Stato *</label>
         <select id="bt-stato" onchange="calcBetNetto()">
           <option value="Attesa Validazione">⏳ Attesa Validazione</option>
           <option value="Validato">✅ Validato</option>
           <option value="Rollato">🔄 Rollato</option>
           <option value="Evaso">💶 Evaso</option>
-          <option value="Annullato">❌ Annullato</option>
+          <option value="Non Adatto">❌ Non Adatto</option>
+          <option value="Sospeso">⏸️ Sospeso</option>
         </select>
       </div>
 
+      <!-- Dati cliente -->
+      <div class="form-group"><label>Nome *</label>
+        <input id="bt-nome" placeholder="Mario">
+      </div>
+      <div class="form-group"><label>Cognome *</label>
+        <input id="bt-cognome" placeholder="Rossi">
+      </div>
+      <div class="form-group"><label>Email</label>
+        <input type="email" id="bt-email" placeholder="mario@email.com">
+      </div>
+      <div class="form-group"><label>Telefono</label>
+        <input type="tel" id="bt-tel" placeholder="+39 333 1234567">
+      </div>
+      <div class="form-group"><label>Data Apertura</label>
+        <input type="date" id="bt-data">
+      </div>
+
+      <!-- Campi economici -->
       <div class="form-group"><label>Gain Lordo (€)</label>
         <input type="number" id="bt-gain" placeholder="0.00" step="0.01" oninput="calcBetNetto()">
       </div>
@@ -1999,20 +2024,22 @@ for all using (bucket_id = 'allegati');</div>
       <div class="form-group"><label>Commissione Prelievo (€)</label>
         <input type="number" id="bt-comm-prel" placeholder="0.00" step="0.01" oninput="calcBetNetto()">
       </div>
-      <div class="form-group"><label>Netto (€) — calcolato auto</label>
-        <input type="number" id="bt-prof" placeholder="0.00" step="0.01" style="background:var(--g4);border-color:var(--bdr3)" readonly>
+      <div class="form-group"><label>Netto (€) — auto</label>
+        <input type="number" id="bt-prof" placeholder="0.00" step="0.01" readonly style="background:var(--g4);border-color:var(--bdr3)">
       </div>
 
       <div class="form-group full"><label>📝 Note</label>
-        <textarea id="bt-note" placeholder="Dettagli apertura, username piattaforma, link documento identità, osservazioni..."></textarea>
+        <textarea id="bt-note" placeholder="Dettagli apertura, username piattaforma, osservazioni..."></textarea>
       </div>
     </div>
 
-    <div class="form-group full" style="margin-top:4px">
-      <label>📎 Allega Documenti</label>
+    <!-- Allegati -->
+    <div style="margin-top:4px;margin-bottom:16px">
+      <label style="font-size:11.5px;font-weight:600;color:var(--txt2);display:block;margin-bottom:8px">📎 Allega Documenti (PDF, JPG, PNG)</label>
       <div class="dropzone" onclick="document.getElementById('bt-file-input').click()">
         <div class="dropzone-ico">📎</div>
-        <div class="dropzone-label">Carica PDF, JPG o PNG (documento identità, screenshot...)</div>
+        <div class="dropzone-label">Carica documento identità, screenshot, PDF...</div>
+        <div style="font-size:11px;color:var(--txt3);margin-top:2px">Max 10MB per file</div>
       </div>
       <input type="file" id="bt-file-input" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleFileUpload(this,'betting','bt-file-list')">
       <div id="bt-file-list" style="margin-top:8px;display:flex;flex-direction:column;gap:5px"></div>
@@ -2020,10 +2047,11 @@ for all using (bucket_id = 'allegati');</div>
 
     <div class="form-actions">
       <button class="btn btn-ghost" onclick="closeModal('betting-modal')">Annulla</button>
-      <button class="btn btn-primary" onclick="saveBetting()">💾 Salva Apertura</button>
+      <button class="btn btn-primary" onclick="saveBetting()">💾 Salva Cliente</button>
     </div>
   </div>
 </div>
+
 
 <!-- CPA -->
 <div class="modal-overlay" id="cpa-modal">
@@ -2604,7 +2632,7 @@ function updateDashboard() {
   DB.sisal.forEach(r => ops.push({data:r.data,cat:'Sisal',desc:r.nome,sub:r.prod,amt:parseFloat(r.comm||0),stato:r.stato}));
   DB.referral.forEach(r => ops.push({data:r.data,cat:'Referral',desc:r.piatt+' — '+r.pers,sub:r.contact||'',amt:parseFloat(r.bonus||0),stato:r.stato}));
   DB.amazon.forEach(r => ops.push({data:r.data,cat:'Amazon',desc:r.nome,sub:r.piatt||'',amt:parseFloat(r.profit||0),stato:r.stato}));
-  DB.betting.forEach(r => ops.push({data:r.data,cat:'Betting',desc:r.piatt+' — '+(r.client||'—'),sub:r.event||'',amt:parseFloat(r.prof||0),stato:r.stato}));
+  DB.betting.forEach(r => ops.push({data:r.data,cat:'Betting',desc:(r.nome||'')+' '+(r.cognome||'')+' — '+(r.piatt||''),sub:r.stato||'',amt:parseFloat(r.prof||0),stato:r.stato}));
   DB.cpa.forEach(r => ops.push({data:r.data,cat:'CPA',desc:r.az+' — '+(r.cli||'—'),sub:r.piatt||'',amt:parseFloat(r.cpa||0),stato:r.stato}));
   ops.sort((a,b) => (b.data||'').localeCompare(a.data||''));
 
@@ -4042,82 +4070,240 @@ async function saveBetting() {
 }
 
 function resetBetFilters() {
-  p = document.getElementById('bet-filter-piatt');
-  s = document.getElementById('bet-filter-stato');
-  const q = document.getElementById('bet-filter-search');
-  if(p) p.value = '';
-  if(s) s.value = '';
-  if(q) q.value = '';
+  ['bet-filter-piatt','bet-filter-stato','bet-filter-search'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
   renderBetting();
+}
+
+function calcBetNetto() {
+  const gain     = parseFloat(document.getElementById('bt-gain')?.value || 0);
+  const costoId  = parseFloat(document.getElementById('bt-costo-id')?.value || 0);
+  const commPrel = parseFloat(document.getElementById('bt-comm-prel')?.value || 0);
+  const netto    = gain - costoId - commPrel;
+
+  const netEl = document.getElementById('bt-prof');
+  if(netEl) netEl.value = netto.toFixed(2);
+
+  const cg = document.getElementById('bt-calc-gain');
+  const cc = document.getElementById('bt-calc-costo');
+  const cm = document.getElementById('bt-calc-comm');
+  const cn = document.getElementById('bt-calc-netto');
+  if(cg) cg.textContent = fmt(gain);
+  if(cc) cc.textContent = fmt(costoId);
+  if(cm) cm.textContent = fmt(commPrel);
+  if(cn) { cn.textContent = fmt(netto); cn.style.color = netto >= 0 ? 'var(--g)' : 'var(--r)'; }
+}
+
+function showBettingModal(idx) {
+  clearFileList('bt-file-list');
+  const tit = document.getElementById('bet-modal-tit');
+  const clearFields = () => {
+    ['bt-nome','bt-cognome','bt-email','bt-tel','bt-gain','bt-costo-id','bt-comm-prel','bt-prof','bt-note'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.value = '';
+    });
+    document.getElementById('bt-stato').value = 'Attesa Validazione';
+    document.getElementById('bt-piatt').value = 'PokerStars';
+    document.getElementById('bt-data').value  = today();
+  };
+
+  if(idx !== undefined && idx !== null && idx !== '' && idx !== 'undefined') {
+    const r = DB.betting[idx];
+    if(!r) { clearFields(); delete document.getElementById('betting-modal').dataset.ei; }
+    else {
+      if(tit) tit.textContent = '✏️ Modifica — ' + (r.nome||'') + ' ' + (r.cognome||'');
+      document.getElementById('bt-piatt').value    = r.piatt || 'PokerStars';
+      document.getElementById('bt-stato').value    = r.stato || 'Attesa Validazione';
+      document.getElementById('bt-nome').value     = r.nome  || '';
+      document.getElementById('bt-cognome').value  = r.cognome || '';
+      document.getElementById('bt-email').value    = r.email || '';
+      document.getElementById('bt-tel').value      = r.tel   || '';
+      document.getElementById('bt-data').value     = r.data  || '';
+      document.getElementById('bt-gain').value     = r.gain  || '';
+      document.getElementById('bt-costo-id').value = r.costoId || '';
+      document.getElementById('bt-comm-prel').value= r.commPrel || '';
+      document.getElementById('bt-prof').value     = r.prof  || '';
+      document.getElementById('bt-note').value     = r.note  || '';
+      document.getElementById('betting-modal').dataset.ei = idx;
+    }
+  } else {
+    if(tit) tit.textContent = '🃏 Nuovo Cliente M.Betting';
+    clearFields();
+    delete document.getElementById('betting-modal').dataset.ei;
+    document.getElementById('betting-modal').removeAttribute('data-ei');
+  }
+  calcBetNetto();
+  openModal('betting-modal');
+}
+
+async function saveBetting() {
+  const nome    = document.getElementById('bt-nome').value.trim();
+  const cognome = document.getElementById('bt-cognome').value.trim();
+  if(!nome || !cognome) { showToast('Inserisci nome e cognome del cliente', 'error'); return; }
+
+  const piatt    = document.getElementById('bt-piatt').value;
+  const stato    = document.getElementById('bt-stato').value;
+  const email    = document.getElementById('bt-email').value.trim();
+  const tel      = document.getElementById('bt-tel').value.trim();
+  const data     = document.getElementById('bt-data').value;
+  const gain     = parseFloat(document.getElementById('bt-gain').value || 0);
+  const costoId  = parseFloat(document.getElementById('bt-costo-id').value || 0);
+  const commPrel = parseFloat(document.getElementById('bt-comm-prel').value || 0);
+  const prof     = gain - costoId - commPrel;
+  const note     = document.getElementById('bt-note').value;
+
+  const idx   = document.getElementById('betting-modal').dataset.ei;
+  const isNew = (idx === undefined || idx === null || idx === '' || idx === 'undefined');
+
+  const r = {
+    id:       isNew ? uid() : (DB.betting[idx]?.id || uid()),
+    sbId:     isNew ? null  : (DB.betting[idx]?.sbId || null),
+    piatt, nome, cognome, email, tel, data,
+    gain, costoId, commPrel, prof, stato, note,
+    client: nome + ' ' + cognome  // compat dashboard
+  };
+
+  if(!isNew) {
+    DB.betting[idx] = { ...DB.betting[idx], ...r };
+  } else {
+    DB.betting.push(r);
+    addNotif('🃏 Nuovo cliente M.Betting: ' + nome + ' ' + cognome + ' (' + piatt + ')', 'var(--b)');
+  }
+
+  // Notifica evaso
+  if(stato === 'Evaso' && (!isNew && DB.betting[idx]?.stato !== 'Evaso' || isNew) && prof > 0) {
+    addNotif('💶 Evaso: ' + nome + ' ' + cognome + ' — netto ' + fmt(prof), 'var(--g)');
+  }
+
+  // Sync Supabase
+  if(SB) {
+    const sbData = {
+      provenienza:          piatt,
+      nome, cognome, email, telefono: tel,
+      data_apertura:        data || null,
+      stato,
+      gain:                 gain,
+      costo_identita:       costoId,
+      commissione_prelievo: commPrel,
+      netto:                prof,
+      note
+    };
+    if(isNew) {
+      const res = await sbInsert('betting', sbData);
+      if(res?.id) {
+        DB.betting[DB.betting.length - 1].sbId = res.id;
+      }
+    } else if(r.sbId) {
+      sbUpdate('betting', r.sbId, sbData);
+    }
+  }
+
+  // Upload allegati
+  await uploadPendingFiles('bt-file-list', r.id);
+
+  save();
+  closeModal('betting-modal');
+  renderBetting();
+  updateDashboard();
+  showToast(isNew ? '✓ Cliente salvato!' : '✓ Cliente aggiornato!');
+}
+
+function segnaEvasoBet(idx) {
+  const r = DB.betting[idx];
+  if(!r) return;
+  const netto = parseFloat(r.prof || 0);
+  if(confirm('Confermi evasione per ' + (r.nome||'') + ' ' + (r.cognome||'') + '?\nNetto: ' + fmt(netto))) {
+    DB.betting[idx].stato = 'Evaso';
+    if(SB && r.sbId) sbUpdate('betting', r.sbId, { stato: 'Evaso' });
+    save();
+    renderBetting();
+    updateDashboard();
+    showToast('✓ Evaso! Netto: ' + fmt(netto));
+    addNotif('💶 Evaso: ' + (r.nome||'') + ' ' + (r.cognome||'') + ' — ' + fmt(netto), 'var(--g)');
+  }
 }
 
 function renderBetting() {
   if(!DB.betting) DB.betting = [];
 
-  // Stats su tutti i record
-  const attesa  = DB.betting.filter(r => r.stato === 'Attesa Validazione').length;
-  const valide  = DB.betting.filter(r => r.stato === 'Validato').length;
-  const rollate = DB.betting.filter(r => r.stato === 'Rollato').length;
-  const evase   = DB.betting.filter(r => r.stato === 'Evaso').length;
-  const gainTot = DB.betting.reduce((s,r) => s + parseFloat(r.gain||0), 0);
-  const nettoTot= DB.betting.filter(r => r.stato==='Evaso').reduce((s,r) => s + parseFloat(r.prof||0), 0);
+  // Stats globali (su tutti i record)
+  const totAll   = DB.betting.length;
+  const attesa   = DB.betting.filter(r => r.stato === 'Attesa Validazione').length;
+  const valide   = DB.betting.filter(r => r.stato === 'Validato').length;
+  const rollate  = DB.betting.filter(r => r.stato === 'Rollato').length;
+  const evase    = DB.betting.filter(r => r.stato === 'Evaso').length;
+  const gainTot  = DB.betting.reduce((s,r) => s + parseFloat(r.gain || 0), 0);
+  const nettoEvaso = DB.betting.filter(r => r.stato === 'Evaso').reduce((s,r) => s + parseFloat(r.prof || 0), 0);
 
-  el = id => document.getElementById(id);
-  if(el('bet-cnt'))    el('bet-cnt').textContent    = DB.betting.length;
+  const el = id => document.getElementById(id);
+  if(el('bet-cnt'))    el('bet-cnt').textContent    = totAll;
   if(el('bet-attesa')) el('bet-attesa').textContent = attesa;
   if(el('bet-valid'))  el('bet-valid').textContent  = valide;
   if(el('bet-act'))    el('bet-act').textContent    = rollate;
   if(el('bet-comp'))   el('bet-comp').textContent   = evase;
   if(el('bet-gain'))   el('bet-gain').textContent   = fmt(gainTot);
-  if(el('bet-prof'))   el('bet-prof').textContent   = fmt(nettoTot);
+  if(el('bet-prof'))   el('bet-prof').textContent   = fmt(nettoEvaso);
 
   // Filtri
-  piatt  = (el('bet-filter-piatt')?.value  || '').toLowerCase();
-  stato  = (el('bet-filter-stato')?.value  || '').toLowerCase();
+  const piatt  = (el('bet-filter-piatt')?.value  || '').toLowerCase();
+  const stato  = (el('bet-filter-stato')?.value  || '').toLowerCase();
   const search = (el('bet-filter-search')?.value || '').toLowerCase();
 
-  data = DB.betting.filter(r => {
-    if(piatt  && (r.piatt||'').toLowerCase() !== piatt)  return false;
-    if(stato  && (r.stato||'').toLowerCase() !== stato)  return false;
-    if(search && !(r.client||'').toLowerCase().includes(search) && !(r.email||'').toLowerCase().includes(search)) return false;
+  const data = DB.betting.filter(r => {
+    if(piatt  && (r.piatt||'').toLowerCase() !== piatt) return false;
+    if(stato  && (r.stato||'').toLowerCase() !== stato) return false;
+    if(search) {
+      const hay = ((r.nome||'') + ' ' + (r.cognome||'') + ' ' + (r.email||'')).toLowerCase();
+      if(!hay.includes(search)) return false;
+    }
     return true;
   });
 
-  tb = el('bet-tb');
+  const tb = el('bet-tb');
   if(!tb) return;
 
   if(!data.length) {
-    tb.innerHTML = `<tr><td colspan="11"><div class="empty"><span class="e">🃏</span><p>Nessuna apertura${piatt||stato ? ' con questi filtri' : ''}</p></div></td></tr>`;
+    tb.innerHTML = `<tr><td colspan="12"><div class="empty"><span class="e">🃏</span><p>Nessun cliente${piatt||stato ? ' con questi filtri' : ''}</p></div></td></tr>`;
     return;
   }
 
-  piattIco = { 'pokerstars':'♠️', 'snai':'🎯', 'sisal':'🎰' };
-  const statiCss = { 'Attesa Validazione':'chip-x', 'Validato':'chip-y', 'Rollato':'chip-o', 'Evaso':'chip-g', 'Annullato':'chip-r' };
+  const statiCss = {
+    'Attesa Validazione':'chip-x',
+    'Validato':'chip-y',
+    'Rollato':'chip-o',
+    'Evaso':'chip-g',
+    'Non Adatto':'chip-r',
+    'Sospeso':'chip-r'
+  };
 
   tb.innerHTML = data.map(r => {
-    ri    = DB.betting.indexOf(r);
-    ico   = piattIco[(r.piatt||'').toLowerCase()] || '🃏';
-    netto = parseFloat(r.prof || 0);
+    const ri    = DB.betting.indexOf(r);
+    const netto = parseFloat(r.prof || 0);
     const css   = statiCss[r.stato] || 'chip-x';
     return `<tr>
       <td class="col-muted">${ri+1}</td>
-      <td><div style="font-weight:600">${ico} ${r.piatt||'—'}</div></td>
+      <td><div style="font-weight:600;font-size:12.5px">${r.piatt||'—'}</div></td>
       <td>
-        <div style="font-weight:500">${r.client||'—'}</div>
-        ${r.email ? `<div style="font-size:11px;color:var(--txt3)">${r.email}</div>` : ''}
-        ${r.tel   ? `<div style="font-size:11px;color:var(--txt3)">${r.tel}</div>`   : ''}
+        <div style="font-weight:600;color:var(--txt)">${r.nome||''} ${r.cognome||''}</div>
+      </td>
+      <td>
+        ${r.email ? `<div style="font-size:11.5px;color:var(--txt2)">${r.email}</div>` : ''}
+        ${r.tel   ? `<div style="font-size:11.5px;color:var(--txt3)">${r.tel}</div>`   : ''}
+        ${!r.email && !r.tel ? '—' : ''}
       </td>
       <td style="font-size:12px;color:var(--txt3)">${r.data||'—'}</td>
       <td class="col-green">${fmt(r.gain||0)}</td>
-      <td style="color:var(--o)">${r.costoId>0 ? fmt(r.costoId) : '—'}</td>
-      <td style="color:var(--o)">${r.commPrel>0 ? fmt(r.commPrel) : '—'}</td>
+      <td style="color:var(--o);font-family:var(--num-font);font-variant-numeric:tabular-nums">${r.costoId>0 ? fmt(r.costoId) : '—'}</td>
+      <td style="color:var(--o);font-family:var(--num-font);font-variant-numeric:tabular-nums">${r.commPrel>0 ? fmt(r.commPrel) : '—'}</td>
       <td class="${netto>=0?'col-green':'col-red'}" style="font-weight:600">${fmt(netto)}</td>
       <td><span class="badge ${css}">${r.stato||'—'}</span></td>
-      <td style="max-width:140px;font-size:11.5px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${r.note||''}">${r.note||'—'}</td>
+      <td style="max-width:140px;font-size:11.5px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(r.note||'').replace(/"/g,"'")}">${r.note||'—'}</td>
       <td>
         <div class="flex gap">
           <button class="btn btn-ghost btn-xs" onclick="showBettingModal(${ri})" title="Modifica">✏️</button>
-          ${r.stato !== 'Evaso' ? `<button class="btn btn-primary btn-xs" onclick="segnaEvasoBet(${ri})" title="Segna evasa">💶</button>` : ''}
+          ${r.stato !== 'Evaso' ? `<button class="btn btn-primary btn-xs" onclick="segnaEvasoBet(${ri})" title="Segna evaso">💶</button>` : ''}
           <button class="btn btn-danger btn-xs" onclick="delRow(DB.betting,${ri},renderBetting)" title="Elimina">🗑</button>
         </div>
       </td>
@@ -4125,822 +4311,10 @@ function renderBetting() {
   }).join('');
 }
 
-function segnaEvasoBet(idx) {
-  r = DB.betting[idx];
-  netto = parseFloat(r.prof||0);
-  if(confirm(`Confermi evasione per ${r.piatt} — ${r.client}?\nNetto: ${fmt(netto)}`)) {
-    DB.betting[idx].stato = 'Evaso';
-    save(); renderBetting(); updateDashboard();
-    showToast('✓ Evasa! Netto: ' + fmt(netto));
-    addNotif('💶 Evasa: ' + r.piatt + ' — ' + r.client + ' — ' + fmt(netto), 'var(--g)');
-  }
+function searchBet(v) {
+  const el = document.getElementById('bet-filter-search');
+  if(el) { el.value = v; renderBetting(); }
 }
-
-function quickAddInvito(i) {
-  DB.fornitori[i].inviti++;
-  DB.fornitori[i].storico.push({ tipo:'aggiungi', qty:1, dest:'Aggiunta rapida', data:today() });
-  save(); renderInviti();
-  showToast(`✓ +1 invito aggiunto — totale: ${DB.fornitori[i].inviti}`);
-}
-
-function delFornitore(i) {
-  if(!confirm(`Eliminare il fornitore "${DB.fornitori[i].nome}"?`)) return;
-  DB.fornitori.splice(i,1);
-  save(); renderInviti();
-  showToast('Fornitore eliminato');
-}
-
-// ─── REFERRAL ───
-let refFilter = 'tutti', refSearch = '';
-function showReferralModal(idx) {
-  fields = ['r-piatt','r-pers','r-contact','r-data','r-bonus','r-bonus2','r-stato','r-exp','r-link','r-note'];
-  if(idx !== undefined) {
-    r = DB.referral[idx];
-    map = {'r-piatt':'piatt','r-pers':'pers','r-contact':'contact','r-data':'data','r-bonus':'bonus','r-bonus2':'bonus2','r-stato':'stato','r-exp':'exp','r-link':'link','r-note':'note'};
-    fields.forEach(id => { const el=document.getElementById(id); if(el) el.value = r[map[id]]||''; });
-    document.getElementById('referral-modal').dataset.ei = idx;
-  } else {
-    document.getElementById('r-data').value = today();
-    delete document.getElementById('referral-modal').dataset.ei;
-    ['r-pers','r-contact','r-bonus','r-bonus2','r-exp','r-link','r-note'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-    document.getElementById('r-stato').value = 'In attesa';
-  }
-  openModal('referral-modal');
-}
-
-function saveReferral() {
-  pers = document.getElementById('r-pers').value.trim();
-  if(!pers) { showToast('Inserisci la persona referita','error'); return; }
-  r = {
-    id:uid(), piatt:document.getElementById('r-piatt').value, pers,
-    contact:document.getElementById('r-contact').value,
-    data:document.getElementById('r-data').value, bonus:document.getElementById('r-bonus').value,
-    bonus2:document.getElementById('r-bonus2').value, stato:document.getElementById('r-stato').value,
-    exp:document.getElementById('r-exp').value, link:document.getElementById('r-link').value,
-    note:document.getElementById('r-note').value
-  };
-  idx = document.getElementById('referral-modal').dataset.ei;
-  isNewRef = idx === undefined || idx === 'undefined' || idx === null || idx === '';
-  if(!isNewRef) { DB.referral[idx]={...DB.referral[idx],...r}; }
-  else { DB.referral.push(r); addNotif(`Nuovo referral: ${pers} su ${r.piatt}`,'var(--c)'); }
-  if(SB) {
-    sbR = { piattaforma:r.piatt, persona:r.pers, contatto:r.contact,
-      data_referral:r.data||null, bonus:parseFloat(r.bonus||0),
-      bonus_amico:parseFloat(r.bonus2||0), stato:r.stato,
-      scadenza:r.exp||null, link:r.link, note:r.note };
-    if(isNewRef) sbInsert('referral', sbR);
-    else if(DB.referral[idx]?.sbId) sbUpdate('referral', DB.referral[idx].sbId, sbR);
-  }
-  // Upload files
-  uploadPendingFiles('r-file-list', r.id);
-  save(); closeModal('referral-modal'); renderReferral(); updateDashboard();
-  showToast(isNewRef ? 'Referral salvato!' : 'Referral aggiornato!');
-}
-
-function clearRefDates() {
-  f = document.getElementById('ref-from');
-  t = document.getElementById('ref-to');
-  if(f) f.value = '';
-  if(t) t.value = '';
-  renderReferral();
-}
-
-function setRefFilter(f, el) {
-  refFilter = f;
-  document.querySelectorAll('#page-referral .filter-btn').forEach(b => b.classList.remove('active'));
-  if(el) el.classList.add('active');
-  renderReferral();
-}
-function searchRef(v) { refSearch = v; renderReferral(); }
-
-function renderReferral() {
-  data = DB.referral;
-  if(refFilter !== 'tutti') {
-    if(['Revolut','BBVA','Isybank','N26'].includes(refFilter)) data = data.filter(r=>r.piatt===refFilter);
-    else data = data.filter(r=>r.stato===refFilter);
-  }
-  if(refSearch) data = data.filter(r=>(r.pers||'').toLowerCase().includes(refSearch.toLowerCase())||(r.piatt||'').toLowerCase().includes(refSearch.toLowerCase()));
-
-  comp = DB.referral.filter(r=>r.stato==='Completato'||r.stato==='Pagato');
-  document.getElementById('ref-cnt').textContent = DB.referral.length;
-  document.getElementById('ref-pend').textContent = DB.referral.filter(r=>r.stato==='In attesa').length;
-  document.getElementById('ref-comp').textContent = comp.length;
-  tot = comp.reduce((s,r)=>s+parseFloat(r.bonus||0),0);
-  document.getElementById('ref-tot').textContent = fmt(tot);
-  document.getElementById('ref-rate').textContent = DB.referral.length ? Math.round(comp.length/DB.referral.length*100)+'%' : '0%';
-
-  tb = document.getElementById('ref-tb');
-  if(!data.length) { tb.innerHTML=`<tr><td colspan="9"><div class="empty"><span class="e">🔗</span><p>Nessun referral trovato</p></div></td></tr>`; return; }
-  tb.innerHTML = data.map((r,i) => {
-    ri = DB.referral.indexOf(r);
-    return `<tr>
-      <td class="col-muted">${ri+1}</td>
-      <td><span class="badge chip-x">${r.piatt}</span></td>
-      <td><div class="col-num">${r.pers}</div>${r.contact?`<div style="font-size:11px;color:var(--txt3)">${r.contact}</div>`:''}</td>
-      <td>${r.data||'—'}</td>
-      <td class="col-green">${fmt(r.bonus)}${r.bonus2>0?`<div style="font-size:11px;color:var(--txt3)">Amico: ${fmt(r.bonus2)}</div>`:''}</td>
-      <td>${sBadge(r.stato)}</td>
-      <td>${r.link?`<button class="btn btn-ghost btn-xs" onclick="copyLink('${r.link}')">📋 Copia</button>`:'—'}</td>
-      <td style="max-width:120px;font-size:12px;color:var(--txt3)">${r.note?r.note.slice(0,50)+(r.note.length>50?'…':''):'—'}</td>
-      <td><div class="flex gap"><button class="btn btn-ghost btn-xs" onclick="showReferralModal(${ri})">✏️</button>
-      <button class="btn btn-danger btn-xs" onclick="delRow(DB.referral,${ri},renderReferral)">🗑</button></div></td>
-    </tr>`;
-  }).join('');
-}
-
-// ─── AMAZON ───
-// ─── AMAZON — PROFILI ───
-if(!DB.profiloAmz) DB.profiloAmz = [];
-currentSaldoIdx = null;
-
-function populateProfiloSelects() {
-  ['a-profilo-sel','b-profilo'].forEach(id => {
-    el = document.getElementById(id);
-    if(!el) return;
-    cur = el.value;
-    el.innerHTML = '<option value="">— Nessun profilo —</option>' +
-      DB.profiloAmz.map(p => `<option value="${p.id}">${p.nome} ${p.cogn} (${p.user||'—'})</option>`).join('');
-    if(cur) el.value = cur;
-  });
-}
-
-function showProfiloAmzModal(idx) {
-  tit = document.getElementById('profilo-amz-tit');
-  if(idx !== undefined) {
-    p = DB.profiloAmz[idx];
-    document.getElementById('pa-nome').value  = p.nome||'';
-    document.getElementById('pa-cogn').value  = p.cogn||'';
-    document.getElementById('pa-user').value  = p.user||'';
-    document.getElementById('pa-pass').value  = p.pass||'';
-    document.getElementById('pa-saldo').value = p.saldo||0;
-    document.getElementById('pa-piatt').value = p.piatt||'Vinted';
-    document.getElementById('pa-note').value  = p.note||'';
-    if(tit) tit.textContent = '✏️ Modifica Profilo';
-    document.getElementById('profilo-amz-modal').dataset.ei = idx;
-  } else {
-    if(tit) tit.textContent = '👤 Nuovo Profilo Amazon';
-    delete document.getElementById('profilo-amz-modal').dataset.ei;
-    ['pa-nome','pa-cogn','pa-user','pa-note'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-    document.getElementById('pa-saldo').value = '0';
-    document.getElementById('pa-pass').value = '';
-  }
-  openModal('profilo-amz-modal');
-}
-
-function saveProfiloAmz() {
-  nome = document.getElementById('pa-nome').value.trim();
-  if(!nome) { showToast('Inserisci il nome','error'); return; }
-  p = {
-    id: uid(), nome, cogn: document.getElementById('pa-cogn').value,
-    user: document.getElementById('pa-user').value,
-    pass: document.getElementById('pa-pass').value,
-    saldo: parseFloat(document.getElementById('pa-saldo').value||0),
-    piatt: document.getElementById('pa-piatt').value,
-    note: document.getElementById('pa-note').value,
-    storicoSaldo: []
-  };
-  idx = document.getElementById('profilo-amz-modal').dataset.ei;
-  if(idx !== undefined) {
-    p.id = DB.profiloAmz[idx].id;
-    p.storicoSaldo = DB.profiloAmz[idx].storicoSaldo || [];
-    DB.profiloAmz[idx] = p;
-    showToast('Profilo aggiornato!');
-  } else {
-    DB.profiloAmz.push(p);
-    showToast('Profilo aggiunto!');
-  }
-  save(); closeModal('profilo-amz-modal');
-  populateProfiloSelects();
-  renderAmazon();
-}
-
-function openSaldoModal(idx) {
-  currentSaldoIdx = idx;
-  p = DB.profiloAmz[idx];
-  document.getElementById('saldo-attuale').textContent = fmt(p.saldo||0);
-  document.getElementById('saldo-importo').value = '';
-  document.getElementById('saldo-nota').value = '';
-  document.getElementById('saldo-op').value = 'imposta';
-  document.getElementById('saldo-preview').textContent = fmt(p.saldo||0);
-  document.getElementById('saldo-preview').style.color = 'var(--txt)';
-  openModal('saldo-modal');
-}
-
-document.addEventListener('input', function(e) {
-  if(e.target.id === 'saldo-importo' || e.target.id === 'saldo-op') {
-    if(currentSaldoIdx === null) return;
-    p = DB.profiloAmz[currentSaldoIdx];
-    op = document.getElementById('saldo-op').value;
-    importo = parseFloat(document.getElementById('saldo-importo').value||0);
-    nuovo = p.saldo||0;
-    if(op === 'imposta') nuovo = importo;
-    else if(op === 'aggiungi') nuovo = (p.saldo||0) + importo;
-    else nuovo = (p.saldo||0) - importo;
-    el = document.getElementById('saldo-preview');
-    if(el) { el.textContent = fmt(nuovo); el.style.color = nuovo >= 0 ? 'var(--g)' : 'var(--r)'; }
-  }
-});
-
-function saveSaldo() {
-  if(currentSaldoIdx === null) return;
-  p = DB.profiloAmz[currentSaldoIdx];
-  op = document.getElementById('saldo-op').value;
-  importo = parseFloat(document.getElementById('saldo-importo').value||0);
-  nota = document.getElementById('saldo-nota').value || '—';
-  old = p.saldo || 0;
-  nuovo = old;
-  if(op === 'imposta') nuovo = importo;
-  else if(op === 'aggiungi') nuovo = old + importo;
-  else nuovo = old - importo;
-  p.saldo = Math.max(0, nuovo);
-  if(!p.storicoSaldo) p.storicoSaldo = [];
-  p.storicoSaldo.push({ op, importo, old, nuovo: p.saldo, nota, data: today() });
-  save(); closeModal('saldo-modal');
-  renderAmazon(); updateDashboard();
-  showToast(`✓ Saldo aggiornato: ${fmt(p.saldo)}`);
-}
-
-function renderProfiloTab() {
-  if(!DB.profiloAmz) DB.profiloAmz = [];
-  grid = document.getElementById('amz-profili-grid');
-  empty = document.getElementById('amz-profili-empty');
-  document.getElementById('amz-profili-cnt').textContent = DB.profiloAmz.length;
-  if(!DB.profiloAmz.length) { grid.innerHTML=''; empty.style.display='block'; return; }
-  empty.style.display='none';
-  grid.innerHTML = DB.profiloAmz.map((p, i) => {
-    prodotti = DB.amazon.filter(a => a.profiloId === p.id);
-    venduti = prodotti.filter(a => a.stato === 'Evaso');
-    inVendita = prodotti.filter(a => a.stato === 'In vendita');
-    incassato = venduti.reduce((s,a) => s + parseFloat(a.venduto||0), 0);
-    initials = ((p.nome||'')[0]||'') + ((p.cogn||'')[0]||'');
-    return `
-    <div style="background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rad);overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor='var(--bdr2)'" onmouseout="this.style.borderColor='var(--bdr)'">
-      <div style="padding:16px 18px 14px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:12px">
-        <div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#ff6b1a,#f5bc00);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#000;flex-shrink:0">${initials.toUpperCase()||'A'}</div>
-        <div style="flex:1;min-width:0">
-          <div style="font-weight:700;font-size:14px;color:var(--txt)">${p.nome} ${p.cogn}</div>
-          <div style="font-size:11px;color:var(--txt3);margin-top:1px">${p.user||'—'} · ${p.piatt||'—'}</div>
-        </div>
-        <div style="display:flex;gap:6px">
-          <button class="btn btn-ghost btn-xs" onclick="showProfiloAmzModal(${i})">✏️</button>
-          <button class="btn btn-danger btn-xs" onclick="delProfiloAmz(${i})">🗑</button>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--bdr)">
-        <div style="padding:11px;text-align:center;border-right:1px solid var(--bdr)">
-          <div style="font-size:9.5px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px">Saldo</div>
-          <div style="font-family:var(--num-font);font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-0.3px;color:var(--g)">${fmt(p.saldo||0)}</div>
-        </div>
-        <div style="padding:11px;text-align:center;border-right:1px solid var(--bdr)">
-          <div style="font-size:9.5px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px">Prodotti</div>
-          <div style="font-family:var(--num-font);font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-0.3px;color:var(--txt)">${prodotti.length}</div>
-        </div>
-        <div style="padding:11px;text-align:center;border-right:1px solid var(--bdr)">
-          <div style="font-size:9.5px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px">In Vendita</div>
-          <div style="font-family:var(--num-font);font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-0.3px;color:var(--o)">${inVendita.length}</div>
-        </div>
-        <div style="padding:11px;text-align:center">
-          <div style="font-size:9.5px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.5px">Incassato</div>
-          <div style="font-family:var(--num-font);font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-0.3px;color:var(--g)">${fmt(incassato)}</div>
-        </div>
-      </div>
-      ${p.note?`<div style="padding:8px 18px;font-size:11.5px;color:var(--txt3);border-bottom:1px solid var(--bdr)">${p.note.slice(0,70)}${p.note.length>70?'…':''}</div>`:''}
-      <div style="padding:10px 18px;display:flex;gap:7px">
-        <button class="btn btn-primary btn-sm" onclick="openSaldoModal(${i})" style="flex:1">💰 Modifica Saldo</button>
-        <button class="btn btn-ghost btn-sm" onclick="filterByProfilo('${p.id}')">📦 Prodotti</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function delProfiloAmz(i) {
-  if(!confirm('Eliminare il profilo? I prodotti associati rimarranno.')) return;
-  DB.profiloAmz.splice(i,1); save(); renderAmazon(); populateProfiloSelects();
-  showToast('Profilo eliminato');
-}
-
-function filterByProfilo(profiloId) {
-  switchAmzTab('prodotti', document.querySelector('#page-amazon .tab:nth-child(3)'));
-  // filter will be applied via profilo
-}
-
-// ─── AMAZON MODAL / SAVE ───
-function showAmazonModal(idx) {
-  populateProfiloSelects();
-  if(idx !== undefined) {
-    r = DB.amazon[idx];
-    map = {'a-nome':'nome','a-asin':'asin','a-link':'link','a-costo':'costo','a-rimb':'rimb','a-riv':'riv','a-data':'data','a-rimb-date':'rimbDate','a-stato':'stato','a-piatt':'piatt','a-ship':'ship','a-fee':'fee','a-note':'note','a-codice':'codice','a-venduto':'venduto'};
-    Object.entries(map).forEach(([id,k]) => { const el=document.getElementById(id); if(el) el.value=r[k]||''; });
-    ps = document.getElementById('a-profilo-sel');
-    if(ps) ps.value = r.profiloId||'';
-    document.getElementById('amazon-modal').dataset.ei = idx;
-  } else {
-    document.getElementById('a-data').value = today();
-    document.getElementById('a-rimb').value = '100';
-    document.getElementById('a-ship').value = '0';
-    document.getElementById('a-fee').value = '0';
-    document.getElementById('a-stato').value = 'Ordinato';
-    delete document.getElementById('amazon-modal').dataset.ei;
-    ['a-nome','a-asin','a-link','a-costo','a-riv','a-note','a-codice','a-venduto'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  }
-  updateAmzCalc();
-  openModal('amazon-modal');
-}
-
-function updateAmzCalc() {
-  costo = parseFloat(document.getElementById('a-costo')?.value||0);
-  rimb = parseFloat(document.getElementById('a-rimb')?.value||100)/100;
-  riv = parseFloat(document.getElementById('a-riv')?.value||0);
-  venduto = parseFloat(document.getElementById('a-venduto')?.value||0);
-  ship = parseFloat(document.getElementById('a-ship')?.value||0);
-  fee = parseFloat(document.getElementById('a-fee')?.value||0)/100;
-  rimbVal = costo * rimb;
-  sellVal = venduto > 0 ? venduto : riv;
-  netSell = sellVal - (sellVal*fee) - ship;
-  profit = rimbVal + netSell - costo;
-  el = document.getElementById('a-calc-val');
-  if(el) { el.textContent = fmt(profit); el.style.color = profit>=0?'var(--g)':'var(--r)'; }
-}
-
-async function saveAmazon() {
-  nome = document.getElementById('a-nome').value.trim();
-  if(!nome) { showToast('Inserisci il nome del prodotto','error'); return; }
-  costo  = parseFloat(document.getElementById('a-costo').value||0);
-  rimb   = parseFloat(document.getElementById('a-rimb').value||100);
-  riv    = parseFloat(document.getElementById('a-riv').value||0);
-  venduto= parseFloat(document.getElementById('a-venduto').value||0);
-  ship   = parseFloat(document.getElementById('a-ship').value||0);
-  fee    = parseFloat(document.getElementById('a-fee').value||0)/100;
-  stato  = document.getElementById('a-stato').value;
-  rimbVal = costo*(rimb/100);
-  sellVal = venduto > 0 ? venduto : riv;
-  netSell = sellVal - (sellVal*fee) - ship;
-  profit  = rimbVal + netSell - costo;
-  profiloId = document.getElementById('a-profilo-sel')?.value || '';
-  codice = document.getElementById('a-codice')?.value || '';
-  r = {
-    id:uid(), nome, codice, profiloId,
-    asin:document.getElementById('a-asin').value,
-    link:document.getElementById('a-link').value,
-    costo, rimb, riv, venduto, ship,
-    fee:parseFloat(document.getElementById('a-fee').value||0),
-    data:document.getElementById('a-data').value,
-    rimbDate:document.getElementById('a-rimb-date').value,
-    stato, piatt:document.getElementById('a-piatt').value,
-    note:document.getElementById('a-note').value, profit
-  };
-  idx = document.getElementById('amazon-modal').dataset.ei;
-  isNewAmz = idx === undefined || idx === 'undefined' || idx === null || idx === '';
-
-  // Se stato = Evaso e venduto > 0, registra incasso in dashboard
-  wasEvaso = !isNewAmz && DB.amazon[idx]?.stato === 'Evaso';
-  nowEvaso = stato === 'Evaso';
-  if(nowEvaso && !wasEvaso && venduto > 0) {
-    addNotif(`💶 Venduto: ${nome} — incasso ${fmt(venduto)}`, 'var(--g)');
-  }
-
-  if(!isNewAmz) { DB.amazon[idx]={...DB.amazon[idx],...r}; }
-  else { DB.amazon.push(r); addNotif(`Nuovo prodotto Amazon: ${nome}`,'var(--o)'); }
-
-  if(SB) {
-    sbA = { nome, asin:r.asin, link:r.link, costo, rimborso_pct:rimb,
-      prezzo_rivendita:riv, spese_spedizione:ship,
-      commissione_pct:parseFloat(document.getElementById('a-fee').value||0),
-      profitto:profit, data_acquisto:r.data||null, data_rimborso:r.rimbDate||null,
-      stato, piattaforma_rivendita:r.piatt, note:r.note };
-    if(isNewAmz) sbInsert('amazon', sbA);
-    else if(DB.amazon[idx]?.sbId) sbUpdate('amazon', DB.amazon[idx].sbId, sbA);
-  }
-  uploadPendingFiles('a-file-list', r.id);
-  save(); closeModal('amazon-modal'); renderAmazon(); updateDashboard();
-  showToast(isNewAmz ? '✓ Prodotto salvato!' : '✓ Prodotto aggiornato!');
-}
-
-// ─── BUONI ───
-function showBuonoModal(idx) {
-  populateProfiloSelects();
-  if(idx !== undefined) {
-    r = DB.buoni[idx];
-    map = {'b-tipo':'tipo','b-val':'val','b-cost':'cost','b-data':'data','b-exp':'exp','b-vendita':'vendita','b-merce':'merce','b-note':'note'};
-    Object.entries(map).forEach(([id,k]) => { const el=document.getElementById(id); if(el) el.value=r[k]||''; });
-    bp = document.getElementById('b-profilo');
-    if(bp) bp.value = r.profiloId||'';
-    document.getElementById('buono-modal').dataset.ei = idx;
-  } else {
-    document.getElementById('b-data').value = today();
-    delete document.getElementById('buono-modal').dataset.ei;
-    ['b-val','b-cost','b-vendita','b-merce','b-note','b-exp'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  }
-  updateBuonoCalc();
-  openModal('buono-modal');
-}
-
-function updateBuonoCalc() {
-  val  = parseFloat(document.getElementById('b-val')?.value||0);
-  cost = parseFloat(document.getElementById('b-cost')?.value||0);
-  sell = parseFloat(document.getElementById('b-vendita')?.value||0);
-  profit = val - cost + sell;
-  el = document.getElementById('b-calc-val');
-  if(el) { el.textContent = fmt(profit); el.style.color = profit>=0?'var(--g)':'var(--r)'; }
-}
-
-function saveBuono() {
-  tipo   = document.getElementById('b-tipo').value;
-  val    = parseFloat(document.getElementById('b-val').value||0);
-  cost   = parseFloat(document.getElementById('b-cost').value||0);
-  vendita= parseFloat(document.getElementById('b-vendita').value||0);
-  profit = val - cost + vendita;
-  profiloId = document.getElementById('b-profilo')?.value||'';
-  r = {
-    id:uid(), tipo, val, cost, profiloId,
-    merce:document.getElementById('b-merce').value,
-    vendita, profit,
-    data:document.getElementById('b-data').value,
-    exp:document.getElementById('b-exp').value,
-    note:document.getElementById('b-note').value,
-    usato:0  // importo già usato del buono
-  };
-  idx = document.getElementById('buono-modal').dataset.ei;
-  isNewBuono = idx === undefined || idx === 'undefined' || idx === null || idx === '';
-  if(!isNewBuono) { DB.buoni[idx]={...DB.buoni[idx],...r}; showToast('Buono aggiornato!'); }
-  else { DB.buoni.push(r); showToast('✓ Buono aggiunto!'); }
-  save(); closeModal('buono-modal'); renderAmazon(); updateDashboard();
-}
-
-function clearAmzDates() {
-  ['amz-from','amz-to'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  renderAmazon();
-}
-
-function setAmzFilter(f, el) {
-  amzFilter = f;
-  document.querySelectorAll('#page-amazon .filter-btn').forEach(b => b.classList.remove('active'));
-  if(el) el.classList.add('active');
-  renderAmazon();
-}
-function searchAmz(v) { amzSearch = v; renderAmazon(); }
-
-function switchAmzTab(t, el) {
-  document.querySelectorAll('#page-amazon .tab').forEach(x => x.classList.remove('active'));
-  if(el) el.classList.add('active');
-  else {
-    tabs = { profili:0, buoni:1, prodotti:2, market:3 };
-    tabEls = document.querySelectorAll('#page-amazon .tab');
-    if(tabEls[tabs[t]]) tabEls[tabs[t]].classList.add('active');
-  }
-  ['profili','buoni','prodotti','market'].forEach(n => {
-    s = document.getElementById(`amz-tab-${n}`);
-    if(s) s.style.display = n===t ? '' : 'none';
-  });
-  // Update action button
-  btn = document.getElementById('amz-main-btn');
-  actions = {
-    profili:  { label:'+ Nuovo Profilo', fn: 'showProfiloAmzModal()' },
-    buoni:    { label:'+ Nuovo Buono',   fn: 'showBuonoModal()' },
-    prodotti: { label:'+ Nuovo Prodotto',fn: 'showAmazonModal()' },
-    market:   { label:'',               fn: '' },
-  };
-  if(btn && actions[t]) {
-    btn.textContent = actions[t].label;
-    btn.style.display = actions[t].label ? '' : 'none';
-    btn.onclick = new Function(actions[t].fn);
-  }
-  if(t === 'market') renderMarket();
-  if(t === 'profili') renderProfiloTab();
-}
-
-// ─── RENDER AMAZON ───
-function renderAmazon() {
-  if(!DB.profiloAmz) DB.profiloAmz = [];
-  data = DB.amazon;
-  if(amzFilter !== 'tutti') data = data.filter(r => r.stato === amzFilter);
-  if(amzSearch) data = data.filter(r =>
-    (r.nome||'').toLowerCase().includes(amzSearch.toLowerCase()) ||
-    (r.codice||'').toLowerCase().includes(amzSearch.toLowerCase())
-  );
-  amzFrom = document.getElementById('amz-from')?.value;
-  amzTo   = document.getElementById('amz-to')?.value;
-  if(amzFrom) data = data.filter(r => r.data && r.data >= amzFrom);
-  if(amzTo)   data = data.filter(r => r.data && r.data <= amzTo);
-
-  // Incassato = somma dei venduto dove stato=Evaso
-  incassato = DB.amazon.filter(r=>r.stato==='Evaso').reduce((s,r)=>s+parseFloat(r.venduto||r.riv||0),0);
-  buoniSaldo = DB.buoni.reduce((s,r)=>s+Math.max(0,parseFloat(r.val||0)-parseFloat(r.usato||0)),0);
-  document.getElementById('amz-cnt').textContent  = DB.amazon.length;
-  document.getElementById('amz-pend').textContent = DB.amazon.filter(r=>['Ordinato','Arrivato'].includes(r.stato)).length;
-  document.getElementById('amz-sale').textContent = DB.amazon.filter(r=>r.stato==='In vendita').length;
-  document.getElementById('amz-prof').textContent = fmt(incassato);
-  document.getElementById('amz-profili-cnt').textContent = DB.profiloAmz.length;
-  document.getElementById('amz-buoni-saldo').textContent = fmt(buoniSaldo);
-  bsh = document.getElementById('buoni-saldo-hdr');
-  if(bsh) bsh.textContent = fmt(buoniSaldo);
-
-  // Update legacy IDs used by dashboard
-  sold = DB.amazon.filter(r=>r.stato==='Evaso');
-
-  // PRODOTTI TABLE
-  tb = document.getElementById('amz-tb');
-  if(!data.length) { tb.innerHTML=`<tr><td colspan="11"><div class="empty"><span class="e">📦</span><p>Nessun prodotto</p></div></td></tr>`; }
-  else tb.innerHTML = data.map((r,i) => {
-    ri = DB.amazon.indexOf(r);
-    pc = parseFloat(r.profit)>=0?'col-green':'col-red';
-    profilo = DB.profiloAmz.find(p=>p.id===r.profiloId);
-    statiCols = {Ordinato:'chip-x',Arrivato:'chip-y',Recensito:'chip-b',
-      'In vendita':'chip-o',Evaso:'chip-g','Da recensire':'chip-y'};
-    return `<tr>
-      <td class="col-muted">${ri+1}</td>
-      <td><span class="badge chip-x" style="font-family:var(--num-font);font-size:11px">${r.codice||'—'}</span></td>
-      <td><div style="font-weight:600;color:var(--txt);max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.nome}</div>
-          ${r.asin?`<div style="font-size:10px;color:var(--txt3)">ASIN: ${r.asin}</div>`:''}</td>
-      <td style="font-size:12px;color:var(--txt3)">${profilo?`${profilo.nome} ${profilo.cogn}`:'—'}</td>
-      <td>${fmt(r.costo)}</td>
-      <td>${r.rimb||100}%</td>
-      <td>${fmt(r.riv)}</td>
-      <td class="col-green">${r.stato==='Evaso'?fmt(r.venduto||r.riv||0):'—'}</td>
-      <td><span class="badge ${statiCols[r.stato]||'chip-x'}">${r.stato}</span></td>
-      <td style="font-size:11px;color:var(--txt3)">${r.data||'—'}</td>
-      <td><div class="flex gap">
-        <button class="btn btn-ghost btn-xs" onclick="showAmazonModal(${ri})">✏️</button>
-        ${r.stato!=='Evaso'?`<button class="btn btn-primary btn-xs" onclick="segnaEvaso(${ri})" title="Segna come venduto">✅</button>`:''}
-        <button class="btn btn-danger btn-xs" onclick="delRow(DB.amazon,${ri},renderAmazon)">🗑</button>
-      </div></td>
-    </tr>`;
-  }).join('');
-
-  // BUONI TABLE
-  tb2 = document.getElementById('amz-btb');
-  if(!DB.buoni.length) { tb2.innerHTML=`<tr><td colspan="10"><div class="empty"><span class="e">🎫</span><p>Nessun buono ancora</p></div></td></tr>`; }
-  else tb2.innerHTML = DB.buoni.map((r,i) => {
-    saldo = Math.max(0, parseFloat(r.val||0) - parseFloat(r.usato||0));
-    profilo = DB.profiloAmz.find(p=>p.id===r.profiloId);
-    expired = r.exp && r.exp < today();
-    return `<tr>
-      <td class="col-muted">${i+1}</td>
-      <td style="font-size:12px">${profilo?`${profilo.nome} ${profilo.cogn}`:'—'}</td>
-      <td>${r.tipo}</td>
-      <td class="col-num">${fmt(r.val)}</td>
-      <td style="color:var(--txt2)">${fmt(r.usato||0)}</td>
-      <td class="${saldo>0?'col-green':'col-red'}" style="font-weight:700;font-family:var(--num-font)">${fmt(saldo)}</td>
-      <td style="font-size:11px">${r.exp||'—'} ${expired?'<span class="badge chip-r">Scaduto</span>':''}</td>
-      <td>${saldo>0?sBadge('Attivo'):sBadge('Esaurito')}</td>
-      <td style="font-size:11px;color:var(--txt3)">${r.note||'—'}</td>
-      <td><div class="flex gap">
-        <button class="btn btn-ghost btn-xs" onclick="showBuonoModal(${i})">✏️</button>
-        <button class="btn btn-yellow btn-xs" onclick="usaBuono(${i})" ${saldo<=0?'disabled style="opacity:.35"':''} title="Usa buono">💳</button>
-        <button class="btn btn-danger btn-xs" onclick="delRow(DB.buoni,${i},renderAmazon)">🗑</button>
-      </div></td>
-    </tr>`;
-  }).join('');
-
-  // PROFILI
-  renderProfiloTab();
-}
-
-function segnaEvaso(idx) {
-  r = DB.amazon[idx];
-  prezzo = prompt(`Prezzo di vendita per "${r.nome}" (€):`, r.riv||'');
-  if(prezzo === null) return;
-  DB.amazon[idx].stato = 'Evaso';
-  DB.amazon[idx].venduto = parseFloat(prezzo)||0;
-  DB.amazon[idx].profit = (DB.amazon[idx].costo*(DB.amazon[idx].rimb/100)) + parseFloat(prezzo) - DB.amazon[idx].costo;
-  save(); renderAmazon(); updateDashboard();
-  showToast(`✓ Venduto! Incassato: ${fmt(parseFloat(prezzo))}`);
-  addNotif(`💶 Venduto: ${r.nome} — ${fmt(parseFloat(prezzo))}`, 'var(--g)');
-}
-
-function usaBuono(idx) {
-  r = DB.buoni[idx];
-  saldo = Math.max(0, parseFloat(r.val||0) - parseFloat(r.usato||0));
-  importo = prompt(`Importo da usare per "${r.tipo}" (saldo: ${fmt(saldo)} €):`, saldo.toFixed(2));
-  if(importo === null) return;
-  uso = Math.min(parseFloat(importo)||0, saldo);
-  DB.buoni[idx].usato = (parseFloat(r.usato||0)) + uso;
-  save(); renderAmazon();
-  showToast(`✓ Usato ${fmt(uso)} — saldo rimasto: ${fmt(saldo-uso)}`);
-}
-
-// ─── MARKET ───
-function renderMarket() {
-  if(!DB.profiloAmz || !DB.profiloAmz.length) {
-    document.getElementById('mkt-profiles-grid').innerHTML = '';
-    document.getElementById('mkt-empty').style.display = 'block';
-    return;
-  }
-  document.getElementById('mkt-empty').style.display = 'none';
-
-  // Calcola performance per profilo
-  profiloStats = DB.profiloAmz.map((p,pi) => {
-    prodotti = DB.amazon.filter(a => a.profiloId === p.id);
-    inVendita = prodotti.filter(a => a.stato === 'In vendita');
-    evasi = prodotti.filter(a => a.stato === 'Evaso');
-    incassato = evasi.reduce((s,a) => s + parseFloat(a.venduto||a.riv||0), 0);
-    return { p, pi, prodotti, inVendita, evasi, incassato };
-  }).sort((a,b) => b.incassato - a.incassato);
-
-  // Top profilo
-  totIncassato = profiloStats.reduce((s,ps) => s + ps.incassato, 0);
-  totInVendita = DB.amazon.filter(a=>a.stato==='In vendita').length;
-  document.getElementById('mkt-total').textContent = fmt(totIncassato);
-  document.getElementById('mkt-active').textContent = totInVendita;
-  if(profiloStats.length) {
-    document.getElementById('mkt-top').textContent = profiloStats[0].p.nome + ' ' + profiloStats[0].p.cogn;
-  }
-
-  document.getElementById('mkt-profiles-grid').innerHTML = profiloStats.map(({p, pi, prodotti, inVendita, evasi, incassato}, rank) => {
-    initials = ((p.nome||'')[0]||'') + ((p.cogn||'')[0]||'');
-    rankBadge = rank===0?'🥇':rank===1?'🥈':rank===2?'🥉':'';
-    return `
-    <div style="background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rad);overflow:hidden${rank===0?';border-color:var(--bdr3)':''}">
-      <div style="padding:16px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:12px">
-        <div style="font-size:22px">${rankBadge}</div>
-        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#ff6b1a,#f5bc00);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#000;flex-shrink:0">${initials.toUpperCase()}</div>
-        <div style="flex:1">
-          <div style="font-weight:700;font-size:14px;color:var(--txt)">${p.nome} ${p.cogn}</div>
-          <div style="font-size:11px;color:var(--txt3)">${p.piatt||'—'} · ${prodotti.length} prodotti totali</div>
-        </div>
-        <div style="font-family:var(--num-font);font-size:24px;font-weight:700;color:var(--g)">${fmt(incassato)}</div>
-      </div>
-      ${inVendita.length > 0 ? `
-      <div style="padding:12px 18px">
-        <div style="font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:10px">📦 Prodotti in vendita (${inVendita.length})</div>
-        <div style="display:flex;flex-direction:column;gap:7px">
-          ${inVendita.map(a => `
-          <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--sur2);border-radius:var(--rad2);border:1px solid var(--bdr)">
-            <div style="flex:1;min-width:0">
-              <div style="font-size:12.5px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.nome}</div>
-              <div style="font-size:10.5px;color:var(--txt3)">Cod: ${a.codice||'—'} · Prezzo: ${fmt(a.riv)}</div>
-            </div>
-            <button class="btn btn-primary btn-xs" onclick="segnaEvaso(${DB.amazon.indexOf(a)})">✅ Vendi</button>
-          </div>`).join('')}
-        </div>
-      </div>` : `<div style="padding:12px 18px;font-size:12px;color:var(--txt3);text-align:center">Nessun prodotto in vendita al momento</div>`}
-    </div>`;
-  }).join('');
-}
-
-// ─── BETTING ───
-function calcBetNetto() {
-  gain    = parseFloat(document.getElementById('bt-gain')?.value||0);
-  costoId = parseFloat(document.getElementById('bt-costo-id')?.value||0);
-  commPrel= parseFloat(document.getElementById('bt-comm-prel')?.value||0);
-  netto   = gain - costoId - commPrel;
-  netEl   = document.getElementById('bt-prof');
-  calcGain= document.getElementById('bt-calc-gain');
-  calcCosto= document.getElementById('bt-calc-costo');
-  calcComm= document.getElementById('bt-calc-comm');
-  calcNetto= document.getElementById('bt-calc-netto');
-  if(netEl)    { netEl.value = netto.toFixed(2); }
-  if(calcGain) calcGain.textContent = fmt(gain);
-  if(calcCosto)calcCosto.textContent = fmt(costoId);
-  if(calcComm) calcComm.textContent = fmt(commPrel);
-  if(calcNetto){ calcNetto.textContent = fmt(netto); calcNetto.style.color = netto>=0?'var(--g)':'var(--r)'; }
-}
-
-function showBettingModal(idx) {
-  clearFileList('bt-file-list');
-  tit = document.getElementById('bet-modal-tit');
-  if(idx !== undefined) {
-    r = DB.betting[idx];
-    if(tit) tit.textContent = `✏️ Modifica — ${r.piatt}`;
-    map = {'bt-piatt':'piatt','bt-client':'client','bt-email':'email','bt-tel':'tel','bt-data':'data','bt-stato':'stato','bt-note':'note','bt-gain':'gain','bt-costo-id':'costoId','bt-comm-prel':'commPrel','bt-prof':'prof'};
-    Object.entries(map).forEach(([id,k]) => { const el=document.getElementById(id); if(el) el.value=r[k]||''; });
-    document.getElementById('betting-modal').dataset.ei = idx;
-  } else {
-    if(tit) tit.textContent = '🃏 Nuova Apertura';
-    document.getElementById('bt-data').value = today();
-    document.getElementById('bt-stato').value = 'Attesa Validazione';
-    delete document.getElementById('betting-modal').dataset.ei;
-    ['bt-client','bt-email','bt-tel','bt-gain','bt-costo-id','bt-comm-prel','bt-prof','bt-note'].forEach(id => {
-      el=document.getElementById(id); if(el) el.value='';
-    });
-  }
-  calcBetNetto();
-  openModal('betting-modal');
-}
-
-async function saveBetting() {
-  piatt  = document.getElementById('bt-piatt').value;
-  client = document.getElementById('bt-client').value.trim();
-  if(!client) { showToast('Inserisci il nome del cliente','error'); return; }
-  gain     = parseFloat(document.getElementById('bt-gain').value||0);
-  costoId  = parseFloat(document.getElementById('bt-costo-id').value||0);
-  commPrel = parseFloat(document.getElementById('bt-comm-prel').value||0);
-  prof     = gain - costoId - commPrel;
-  stato    = document.getElementById('bt-stato').value;
-  r = {
-    id:uid(), piatt, client,
-    email:document.getElementById('bt-email').value,
-    tel:document.getElementById('bt-tel').value,
-    gain, costoId, commPrel, prof,
-    data:document.getElementById('bt-data').value,
-    stato, note:document.getElementById('bt-note').value
-  };
-  idx = document.getElementById('betting-modal').dataset.ei;
-  isNew = idx === undefined || idx === 'undefined' || idx === null || idx === '';
-  wasEvaso = !isNew && DB.betting[idx]?.stato === 'Evaso';
-  if(!isNew) { DB.betting[idx]={...DB.betting[idx],...r}; }
-  else { DB.betting.push(r); addNotif(`Nuova apertura ${piatt}: ${client}`,'var(--b)'); }
-  // Notifica quando diventa Evaso
-  if(stato==='Evaso' && !wasEvaso && prof>0) {
-    addNotif(`💶 Evasa: ${piatt} — ${client} — netto ${fmt(prof)}`,'var(--g)');
-  }
-  if(SB) {
-    sbB = {
-      piattaforma: piatt,
-      cliente: client,
-      email: r.email||null,
-      telefono: r.tel||null,
-      gain: gain,
-      costo_identita: costoId,
-      commissione_prelievo: commPrel,
-      profitto: prof,
-      data_operazione: r.data||null,
-      stato: stato,
-      note: r.note||null
-    };
-    if(isNew) sbInsert('betting', sbB);
-    else if(DB.betting[idx]?.sbId) sbUpdate('betting', DB.betting[idx].sbId, sbB);
-  }
-  await uploadPendingFiles('bt-file-list', r.id);
-  save(); closeModal('betting-modal'); renderBetting(); updateDashboard();
-  showToast(isNew ? '✓ Apertura salvata!' : '✓ Apertura aggiornata!');
-}
-
-function clearBetDates() {
-  ['bet-from','bet-to'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  renderBetting();
-}
-
-
-
-function searchBet(v) { const el=document.getElementById('bet-filter-search'); if(el){el.value=v;} renderBetting(); }
-
-function renderBetting() {
-  data = [...DB.betting];
-  // Filtro piattaforma
-  if(betPiattFilter !== 'tutti') data = data.filter(r => r.piatt === betPiattFilter);
-  // Filtro stato
-  if(betStatoFilter !== 'tutti') data = data.filter(r => r.stato === betStatoFilter);
-  // Filtro testo
-  if(betSearch) data = data.filter(r =>
-    (r.client||'').toLowerCase().includes(betSearch.toLowerCase()) ||
-    (r.piatt||'').toLowerCase().includes(betSearch.toLowerCase())
-  );
-  // Filtro date
-  const betFrom = document.getElementById('bet-from')?.value;
-  const betTo   = document.getElementById('bet-to')?.value;
-  if(betFrom) data = data.filter(r => r.data && r.data >= betFrom);
-  if(betTo)   data = data.filter(r => r.data && r.data <= betTo);
-
-  // Stats
-  attesa = DB.betting.filter(r=>r.stato==='Attesa Validazione');
-  evase  = DB.betting.filter(r=>r.stato==='Evaso');
-  valide = DB.betting.filter(r=>r.stato==='Validato');
-  rollate= DB.betting.filter(r=>r.stato==='Rollato');
-  const gainLordo  = DB.betting.reduce((s,r)=>s+parseFloat(r.gain||0),0);
-  const nettoEvaso = evase.reduce((s,r)=>s+parseFloat(r.prof||0),0);
-
-  document.getElementById('bet-cnt').textContent   = DB.betting.length;
-  const betAttesaEl = document.getElementById('bet-attesa'); if(betAttesaEl) betAttesaEl.textContent = attesa.length;
-  document.getElementById('bet-valid').textContent  = valide.length;
-  document.getElementById('bet-act').textContent    = rollate.length;
-  document.getElementById('bet-comp').textContent   = evase.length;
-  document.getElementById('bet-gain').textContent   = fmt(gainLordo);
-  document.getElementById('bet-prof').textContent   = fmt(nettoEvaso);
-
-  statiCols = { 'Attesa Validazione':'chip-x', Validato:'chip-y', Rollato:'chip-o', Evaso:'chip-g', Annullato:'chip-r' };
-  piattIco  = { PokerStars:'♠️', Snai:'🎯', Sisal:'🎰' };
-
-  tb = document.getElementById('bet-tb');
-  if(!data.length) {
-    tb.innerHTML=`<tr><td colspan="11"><div class="empty"><span class="e">🃏</span><p>Nessuna apertura${betPiattFilter!=='tutti'?' per '+betPiattFilter:''}</p></div></td></tr>`;
-    return;
-  }
-  tb.innerHTML = data.map(r => {
-    ri = DB.betting.indexOf(r);
-    ico = piattIco[r.piatt]||'🃏';
-    netto = parseFloat(r.prof||0);
-    return `<tr>
-      <td class="col-muted">${ri+1}</td>
-      <td><div style="font-weight:600;color:var(--txt)">${ico} ${r.piatt}</div></td>
-      <td><div style="font-weight:500;color:var(--txt)">${r.client||'—'}</div>${r.email?`<div style="font-size:11px;color:var(--txt3)">${r.email}</div>`:''} ${r.tel?`<div style="font-size:11px;color:var(--txt3)">${r.tel}</div>`:''}</td>
-      <td style="font-size:12px;color:var(--txt3)">${r.data||'—'}</td>
-      <td class="col-green">${fmt(r.gain||0)}</td>
-      <td style="color:var(--o);font-family:var(--num-font);font-variant-numeric:tabular-nums">${r.costoId>0?fmt(r.costoId):'—'}</td>
-      <td style="color:var(--o);font-family:var(--num-font);font-variant-numeric:tabular-nums">${r.commPrel>0?fmt(r.commPrel):'—'}</td>
-      <td class="${netto>=0?'col-green':'col-red'}" style="font-weight:600">${fmt(netto)}</td>
-      <td>${sBadge(r.stato)}</td>
-      <td style="max-width:160px;font-size:11.5px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis"
-          title="${r.note||''}">${r.note||'—'}</td>
-      <td><div class="flex gap">
-        <button class="btn btn-ghost btn-xs" onclick="showBettingModal(${ri})">✏️</button>
-        ${r.stato!=='Evaso'?`<button class="btn btn-primary btn-xs" onclick="segnaEvasoBet(${ri})" title="Segna come evasa">💶</button>`:''}
-        <button class="btn btn-danger btn-xs" onclick="delRow(DB.betting,${ri},renderBetting)">🗑</button>
-      </div></td>
-    </tr>`;
-  }).join('');
-}
-
 // ─── CPA ───
 let cpaFilter = 'tutti', cpaSearch = '';
 function showCpaModal(idx) {
@@ -6073,18 +5447,21 @@ async function loadFromSupabase() {
     }
     if(bettingData) {
       DB.betting = bettingData.map(r => ({
-        id: r.id, sbId: r.id,
-        piatt: r.piattaforma||'',
-        client: r.cliente||'',
-        email: r.email||'',
-        tel: r.telefono||'',
-        gain: parseFloat(r.gain||r.bonus||0),
-        costoId: parseFloat(r.costo_identita||0),
-        commPrel: parseFloat(r.commissione_prelievo||0),
-        prof: parseFloat(r.profitto||0),
-        data: r.data_operazione||'',
-        stato: r.stato||'Attesa Validazione',
-        note: r.note||''
+        id:       r.id,
+        sbId:     r.id,
+        piatt:    r.provenienza || '',
+        nome:     r.nome || '',
+        cognome:  r.cognome || '',
+        email:    r.email || '',
+        tel:      r.telefono || '',
+        data:     r.data_apertura || '',
+        stato:    r.stato || 'Attesa Validazione',
+        gain:     parseFloat(r.gain || 0),
+        costoId:  parseFloat(r.costo_identita || 0),
+        commPrel: parseFloat(r.commissione_prelievo || 0),
+        prof:     parseFloat(r.netto || 0),
+        note:     r.note || '',
+        client:   (r.nome||'') + ' ' + (r.cognome||'')
       }));
     }
     if(cpaData) {
